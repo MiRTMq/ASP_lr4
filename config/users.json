@@ -1,0 +1,56 @@
+{
+  "Id":[
+    "0":{
+      "Name":"Petro",
+      "Surname":"Smith",
+      "RentedBooks":[
+        "0",
+        "1"
+      ]
+    },
+    "1":{
+      "Name":"Pavlo",
+      "Surname":"Adams",
+      "RentedBooks":[
+        "2",
+        "3"
+      ]
+    },
+    "2":{
+      "Name":"Alice",
+      "Surname":"Hlushko",
+      "RentedBooks":[
+        "4",
+        "5"
+      ]
+    },
+    "3":{
+      "Name":"Bob",
+      "Surname":"Bahrianyy",
+      "RentedBooks":[
+        "6",
+        "7"
+      ]
+    },
+    "4":{
+      "Name":"Martha",
+      "Surname":"Pozn'uk",
+      "RentedBooks":[
+        "8",
+        "9"
+      ]
+    },
+
+    "5":{
+      "Name":"Ann",
+      "Surname":"Zal'iznyak",
+      "RentedBooks":[
+        "10",
+        "11"
+      ]
+  ]
+
+
+
+
+}
