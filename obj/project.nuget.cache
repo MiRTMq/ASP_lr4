@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QUCeXFQgQHnQwnevx7gvvraFrtvJg2cbVkWVQjgA+5sop6/LbcmH+A5VLRDHK9+Z5a0YBcKnanA9GDU8AW07JA==",
+  "success": true,
+  "projectFilePath": "/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/ASP_lr4.csproj",
+  "expectedPackageFiles": [
+    "/home/n7a/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.8/microsoft.aspnetcore.app.ref.8.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
