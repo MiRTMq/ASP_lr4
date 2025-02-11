@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/ASP_lr4.csproj",
+      "projectUniqueName": "/home/n7a/mnt/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/ASP_lr4.csproj",
       "projectName": "ASP_lr4",
-      "projectPath": "/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/ASP_lr4.csproj",
+      "projectPath": "/home/n7a/mnt/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/ASP_lr4.csproj",
       "packagesPath": "/home/n7a/.nuget/packages/",
-      "outputPath": "/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/obj/",
+      "outputPath": "/home/n7a/mnt/home/n7a/Desktop/3/asp/projects/Routing_lr4/ASP_lr4/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/n7a/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -54,12 +59,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.8, 8.0.8]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -68,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/nix/store/9rm1rfc7llb95ss12vb7708ivmxwmpdl-dotnet-sdk-8.0.405/share/dotnet/sdk/8.0.405/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

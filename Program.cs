@@ -4,35 +4,89 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 Dictionary<string, string> path = new Dictionary<string, string>();
-path.Add("users", "config/config.json");
+path.Add("users", "config/users.json");
 path.Add("books", "config/books.json");
 
 builder.Configuration.AddJsonFile(path["books"]);
+builder.Configuration.AddJsonFile(path["users"]);
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for
-    // production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+string GetBookTitleById(int id, IConfiguration config)
+{
+    var title = config.GetSection("Books")
+                  .GetSection(id.ToString())
+                  .GetValue<string>("Title");
+    return title ?? "not found";
+}
 
-app.MapControllerRoute(name: "default",
-                       pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapGet("/", (IConfiguration config) =>
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/Library", async context =>
     {
-return(config.GetSection("Books").GetSection("1").GetSection("Title"));
+        context.Response.ContentType = "text/plain; charset=utf-8";
+        await context.Response.WriteAsync("Вітаємо у бібліотеці!");
+    });
+
+    endpoints.MapGet("/Library/Books", (IConfiguration config) =>
+    {
+        IConfigurationSection section = config.GetSection("Books");
+
+        var bookList = section.GetChildren()
+            .Select(book => $"{book.GetValue<string>("Title")} - {book.GetValue<string>("Author")}")
+            .ToList();
+
+        return Results.Json(bookList);
+    });
+
+    endpoints.MapGet("/Library/Profile/{id?}", (HttpContext context, IConfiguration config) =>
+    {
+        string userId = context.Request.RouteValues["id"]?.ToString();
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Results.Json(new { Message = "Артем 22210909" });
+        }
+
+        if (!int.TryParse(userId, out int id) || id < 0 || id > 5)
+        {
+            return Results.BadRequest("ID недоступне (лише від 0 до 5)");
+        }
+
+        IConfigurationSection userSection = config.GetSection("Users").GetSection(id.ToString());
+        if (!userSection.Exists())
+        {
+            return Results.NotFound($"Користувач із ID {id} не знайдений");
+        }
+
+        var rentedBooks = userSection.GetSection("RentedBooks")
+                             .GetChildren()
+                             .Select(bookId => GetBookTitleById(int.Parse(bookId.Value), config))
+                             .ToList();
+
+        var user = new
+        {
+            Name = userSection.GetValue<string>("Name"),
+            Surname = userSection.GetValue<string>("Surname"),
+            RentedBooks = rentedBooks
+        };
+
+        return Results.Json(user);
+    });
+});
+
+app.MapGet("/", () =>
+{
+    return "/Library\n/Library/Books\n/Library/Profile/{id}";
+});
+
+app.Run(async context =>
+{
+    context.Response.ContentType = "text/plain; charset=utf-8";
+    await context.Response.WriteAsync("Сторінка не знайдена");
 });
 
 app.Run();
